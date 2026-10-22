@@ -2632,21 +2632,27 @@ function App() {
                                     <div className="space-y-4">
                                         {receiveRow}
                                         <div className="space-y-2">
-                                            <Eyebrow>Code or link</Eyebrow>
-                                            <Input
-                                                placeholder="amber-otter-cloud"
-                                                value={code}
-                                                onChange={(e) => { setCode(e.target.value); setPastedRequestLink(''); }}
-                                                onKeyDown={(e) => { if (e.key === 'Enter' && !busy && code.trim()) receive(); }}
-                                                disabled={receiving}
-                                                autoFocus
-                                                autoComplete="off"
-                                            />
+                                            <Eyebrow>
+                                                <label htmlFor="floe-receive-code">Code or link</label>
+                                            </Eyebrow>
+                                                <Input
+                                                    id="floe-receive-code"
+                                                    placeholder="amber-otter-cloud"
+                                                    value={code}
+                                                    onChange={(e) => { setCode(e.target.value); setPastedRequestLink(null); }}
+                                                    onKeyDown={(e) => { if (e.key === 'Enter' && !busy && code.trim()) void receive(); }}
+                                                    disabled={receiving}
+                                                    autoFocus
+                                                    autoComplete="off"
+                                                />
                                         </div>
                                         <div className="space-y-2">
-                                            <Eyebrow>Save to</Eyebrow>
+                                            <Eyebrow>
+                                              <label htmlFor="floe-receive-save">Save to</label>
+                                            </Eyebrow>
                                             <div className="flex gap-2">
                                                 <Input
+                                                    id="floe-receive-save"
                                                     className="flex-1"
                                                     placeholder="Downloads (default)"
                                                     value={output}
