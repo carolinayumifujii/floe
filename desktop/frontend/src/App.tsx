@@ -2639,7 +2639,7 @@ function App() {
                                                     id="floe-receive-code"
                                                     placeholder="amber-otter-cloud"
                                                     value={code}
-                                                    onChange={(e) => { setCode(e.target.value); setPastedRequestLink(null); }}
+                                                    onChange={(e) => { setCode(e.target.value); setPastedRequestLink(''); }}
                                                     onKeyDown={(e) => { if (e.key === 'Enter' && !busy && code.trim()) void receive(); }}
                                                     disabled={receiving}
                                                     autoFocus
