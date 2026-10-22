@@ -610,18 +610,31 @@ describe('the progress label', () => {
  */
 describe('the views no other test mounts', () => {
     it('renders the receive console when the Receive tab is chosen', async () => {
+        const user = userEvent.setup();
         mount();
         await settled();
 
-        await userEvent.click(screen.getByRole('button', {name: 'Receive'}));
+        await user.click(screen.getAllByRole('button', {name: 'Receive'})[0]);
 
-        // The code field is the view: placeholder, not label, because the
-        // Eyebrow above it is not associated with the input.
-        expect(
-            screen.getByPlaceholderText('amber-otter-cloud')
-        ).toBeInstanceOf(HTMLInputElement);
-        // And the save-folder field, which is the half that reads a real path.
-        expect(screen.getByPlaceholderText('Downloads (default)')).toBeTruthy();
+        // Both fields are named by their visible captions.
+        const code = screen.getByRole('textbox', {name: 'Code or link'});
+        expect(code).toBe(screen.getByPlaceholderText('amber-otter-cloud'));
+
+        const folder = screen.getByRole('textbox', {name: 'Save to'});
+        expect(folder).toBe(screen.getByPlaceholderText('Downloads (default)'));
+    });
+
+    it('moves focus to the save folder when its caption is clicked', async () => {
+        const user = userEvent.setup();
+        mount();
+        await settled();
+
+        await user.click(screen.getAllByRole('button', {name: 'Receive'})[0]);
+
+        const folder = screen.getByRole('textbox', {name: 'Save to'});
+        await user.click(screen.getByText('Save to'));
+
+        expect(document.activeElement).toBe(folder);
     });
 
     it('renders the history console, empty and populated', async () => {
