@@ -607,6 +607,9 @@ describe('the progress label', () => {
  * These are deliberately shallow. They assert that each view mounts and shows
  * the controls that make it that view, which is what a bad extraction breaks;
  * they do not try to cover behavior the views do not have tests for today.
+ * The receive cases also pin that each field is named by its caption and that
+ * clicking a caption focuses its field (#705), which an extraction that
+ * dropped a label or an id would break.
  */
 describe('the views no other test mounts', () => {
     it('renders the receive console when the Receive tab is chosen', async () => {
